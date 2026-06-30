@@ -1,0 +1,12 @@
+{
+    "name": "Astro Website Container",
+    "image": "katorlys/workspace-node:latest",
+    "postStartCommand": "pnpm install",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "astro-build.astro-vscode"
+            ]
+        }
+    }
+}
