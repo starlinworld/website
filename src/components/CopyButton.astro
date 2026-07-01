@@ -1,0 +1,33 @@
+---
+import { serverAddress } from '../data.ts';
+---
+
+<div class="relative flex items-center justify-center bg-white rounded-full pl-6 pr-16 py-4">
+  <span class="text-primary font-semibold text-base">{serverAddress}</span>
+  <button
+    id="copy-button"
+    class="absolute right-2 bg-primary text-white p-2.5 rounded-full transition-transform active:scale-90 hover:opacity-90 flex items-center justify-center"
+    aria-label="Copy server address"
+  >
+    <i class="fa-regular fa-copy text-xl"></i>
+  </button>
+</div>
+
+<script define:vars={{ serverAddress }}>
+  const button = document.getElementById("copy-button");
+
+  button?.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(serverAddress);
+      const icon = button.querySelector("i");
+      if (icon) {
+        icon.className = "fa-solid fa-check text-xl";
+        setTimeout(() => {
+          icon.className = "fa-regular fa-copy text-xl";
+        }, 1500);
+      }
+    } catch (err) {
+      console.error("Copy failed:", err);
+    }
+  });
+</script>

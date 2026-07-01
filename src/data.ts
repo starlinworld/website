@@ -16,10 +16,10 @@ export type QQGroup = {
     image: string;
 };
 
-const mainQQGroup = "https://jq.qq.com/?_wv=1027&k=1DsWS4Ls"
-const workQQGroup = "https://jq.qq.com/?_wv=1027&k=EecCR3Zf"
-
+export const mainQQGroup = "https://jq.qq.com/?_wv=1027&k=1DsWS4Ls";
+export const workQQGroup = "https://jq.qq.com/?_wv=1027&k=EecCR3Zf";
 export const serverAddress = "mc.starlin.world";
+
 export const socialLinks = [
     {
         label: "QQ group",

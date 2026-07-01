@@ -1,0 +1,58 @@
+---
+import { mainQQGroup } from "../data.ts";
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-background text-white py-8 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div
+      class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
+    >
+      <!-- Copyright Info -->
+      <div class="flex flex-col md:flex-row items-start md:items-center gap-4">
+        <a href="/" class="flex items-center">
+          <img
+            src="/brand/logo_english_white.svg"
+            alt="StarlinWorld"
+            class="w-48"
+          />
+        </a>
+        <div class="text-sm text-muted leading-relaxed">
+          <p>&copy; 2017-{currentYear} StarlinWorld.</p>
+          <p>
+            Design: <a
+              href="https://katorly.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-text hover:text-muted transition-colors">Katorly Lab</a
+            >.
+          </p>
+          <p>Not an official Minecraft product.</p>
+          <p>Not associated with Mojang or Microsoft.</p>
+        </div>
+      </div>
+
+      <!-- Social Icons -->
+      <div class="flex items-center gap-4 self-end md:self-auto">
+        <a
+          href={mainQQGroup}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-muted hover:text-white transition-colors text-2xl"
+          aria-label="QQ"
+        >
+          <i class="fa-brands fa-qq"></i>
+        </a>
+        <a
+          href="https://github.com/starlinworld"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-muted hover:text-white transition-colors text-2xl"
+          aria-label="GitHub"
+        >
+          <i class="fa-brands fa-github"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

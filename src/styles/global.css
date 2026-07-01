@@ -1,11 +1,11 @@
 @import '@fontsource-variable/nunito';
 @import '@fontsource-variable/inter';
-@import 'material-symbols/outlined.css';
+@import '@fortawesome/fontawesome-free/css/all.min.css';
 @import 'tailwindcss';
 
 :root {
 	--color-background: #171615;
-	--color-primary: #35A2FF;
+	--color-primary: #27A1FF;
 	--color-text: #FFFFFF;
 	--color-text-muted: #999999;
 	--color-muted: #D9D9D9;
@@ -14,8 +14,8 @@
 }
 
 @theme {
-	--font-sans: 'Nunito Variable', 'Inter Variable', sans-serif;
-	--font-ui: 'Inter Variable', 'Nunito Variable', sans-serif;
+	--font-sans: 'Inter Variable', sans-serif;
+	--font-display: 'Nunito Variable', sans-serif;
 	--color-background: var(--color-background);
 	--color-primary: var(--color-primary);
 	--color-text: var(--color-text);
@@ -65,6 +65,10 @@ video {
 a {
 	color: inherit;
 	text-decoration: none;
+}
+
+a[class*="text-"] {
+	color: revert-layer;
 }
 
 button,
