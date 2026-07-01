@@ -1,0 +1,103 @@
+@import '@fontsource-variable/nunito';
+@import '@fontsource-variable/inter';
+@import 'material-symbols/outlined.css';
+@import 'tailwindcss';
+
+:root {
+	--color-background: #171615;
+	--color-primary: #35A2FF;
+	--color-text: #FFFFFF;
+	--color-text-muted: #999999;
+	--color-muted: #D9D9D9;
+	--color-green: #70FF30;
+	--color-pink: #FF39F5;
+}
+
+@theme {
+	--font-sans: 'Nunito Variable', 'Inter Variable', sans-serif;
+	--font-ui: 'Inter Variable', 'Nunito Variable', sans-serif;
+	--color-background: var(--color-background);
+	--color-primary: var(--color-primary);
+	--color-text: var(--color-text);
+	--color-text-muted: var(--color-text-muted);
+	--color-muted: var(--color-muted);
+	--color-green: var(--color-green);
+	--color-pink: var(--color-pink);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	min-width: 320px;
+	background: var(--color-background);
+	color: var(--color-text);
+	font-family: var(--font-sans);
+	line-height: 1.5;
+	scroll-behavior: smooth;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	min-height: 100vh;
+	margin: 0;
+	overflow-x: hidden;
+	background: var(--color-background);
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+}
+
+img,
+video {
+	height: auto;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+	font: inherit;
+}
+
+button,
+a {
+	-webkit-tap-highlight-color: transparent;
+}
+
+button {
+	cursor: pointer;
+}
+
+:focus-visible {
+	outline: 2px solid var(--color-primary);
+	outline-offset: 4px;
+}
+
+::selection {
+	background: color-mix(in srgb, var(--color-primary) 38%, transparent);
+	color: var(--color-text);
+}
+
+.material-symbols-outlined {
+	font-variation-settings:
+		'FILL' 0,
+		'wght' 400,
+		'GRAD' 0,
+		'opsz' 24;
+	line-height: 1;
+}
