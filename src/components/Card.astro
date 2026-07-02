@@ -1,0 +1,47 @@
+---
+interface Props {
+  image: string;
+  title: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+}
+
+const { image, title, alt = title, width = 1920, height = 1080 } = Astro.props;
+const uniqueId = `card-${Math.random().toString(36).substring(2, 9)}`;
+---
+
+<div class="overflow-hidden rounded-lg md:rounded-xl mb-4">
+  <a
+    href={image}
+    data-pswp-width={width}
+    data-pswp-height={height}
+    target="_blank"
+    class="block cursor-zoom-in transition-opacity hover:opacity-80"
+  >
+    <img
+      src={image}
+      alt={alt}
+      class="w-full h-auto object-cover"
+      id={uniqueId}
+    />
+  </a>
+</div>
+<p class="text-lg text-text">{title}</p>
+
+<script>
+  import PhotoSwipeLightbox from "photoswipe/lightbox";
+  import "photoswipe/style.css";
+
+  if (typeof window !== "undefined") {
+    const lightbox = new PhotoSwipeLightbox({
+      gallery: "body",
+      children: "a[data-pswp-width]",
+      pswpModule: () => import("photoswipe"),
+      bgOpacity: 0.9,
+      spacing: 0.1,
+    });
+
+    lightbox.init();
+  }
+</script>

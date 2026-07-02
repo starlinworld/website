@@ -2,6 +2,8 @@ export type MediaItem = {
     title: string;
     src: string;
     type: "image" | "video";
+    width?: number;
+    height?: number;
 };
 
 export type FeatureItem = {
@@ -33,21 +35,46 @@ export const socialLinks = [
     },
 ];
 
+export const servers = [
+  {
+    id: "survival",
+    name: "Survival",
+    icon: "fa-solid fa-house",
+    image: "/assets/intro/survival.png",
+    color: "text-green",
+    href: "https://docs.starlin.world/servers/survival",
+  },
+  {
+    id: "modded",
+    name: "Modded",
+    icon: "fa-solid fa-puzzle-piece",
+    image: "/assets/intro/modded.png",
+    color: "text-pink",
+    href: "https://docs.starlin.world/servers/modded",
+  },
+];
+
 export const landscapeItems: MediaItem[] = [
     {
         title: "2017年8月一位女士的家",
         src: "/assets/intro/2017年8月一位女士的家.jpg",
         type: "image",
+        width: 1920,
+        height: 1080,
     },
     {
         title: "2017年某农场",
         src: "/assets/intro/2017年某农场.png",
         type: "image",
+        width: 1097,
+        height: 607,
     },
     {
         title: "2020年主城",
         src: "/assets/intro/2020年主城.png",
         type: "image",
+        width: 4096,
+        height: 2246,
     },
 ];
 
@@ -55,27 +82,27 @@ export const featureItems: FeatureItem[] = [
     {
         title: "Always Up to Date",
         description: "Once PaperMC and plugins are ready, we update the server to the latest Minecraft version.",
-        icon: "",
+        icon: "fa-solid fa-arrow-up",
     },
     {
         title: "World Storage",
         description: "The world will always remain accessible. We backup daily and store them securely, so you can build without worries.",
-        icon: "",
+        icon: "fa-solid fa-database",
     },
     {
         title: "Player-Managed",
         description: "The server is maintained by the community. Plugin requests and customizations are discussed and determined by the players.",
-        icon: "",
+        icon: "fa-solid fa-users",
     },
     {
         title: "Non-Profit",
-        description: "We are a non-profit server, and all proceeds are reinvested into improving the server and providing a better experience for our players.Since founded, the server is fully supported by player donations, and never has any monetization.",
-        icon: "",
+        description: "Since founded, the server is fully supported by player donations, and never has any monetization.",
+        icon: "fa-solid fa-hand-holding-heart",
     },
     {
         title: "Open-Source",
         description: "All configuration files, excluding player data, are open-sourced on GitHub.",
-        icon: "",
+        icon: "fa-brands fa-github",
     }
 ];
 

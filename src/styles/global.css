@@ -96,12 +96,3 @@ button {
 	background: color-mix(in srgb, var(--color-primary) 38%, transparent);
 	color: var(--color-text);
 }
-
-.material-symbols-outlined {
-	font-variation-settings:
-		'FILL' 0,
-		'wght' 400,
-		'GRAD' 0,
-		'opsz' 24;
-	line-height: 1;
-}
