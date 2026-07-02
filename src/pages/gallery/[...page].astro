@@ -1,0 +1,138 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Card from "../../components/Card.astro";
+import { galleryItems } from "../../data";
+
+const firstPageItems = 11;
+const normalPageItems = 12;
+const galleryItemsDesc = [...galleryItems].reverse(); // Timeline order: newest -> oldest
+const remainingItems = Math.max(galleryItemsDesc.length - firstPageItems, 0);
+const totalPages = 1 + Math.ceil(remainingItems / normalPageItems);
+
+export function getStaticPaths() {
+  const remainingItems = Math.max(galleryItems.length - 11, 0);
+  const pageCount = 1 + Math.ceil(remainingItems / 12);
+  return Array.from({ length: pageCount }, (_, index) => {
+    const page = index + 1;
+    return {
+      params: { page: page === 1 ? undefined : String(page) },
+      props: { page },
+    };
+  });
+}
+
+const { page } = Astro.props;
+const startIndex =
+  page === 1 ? 0 : firstPageItems + (page - 2) * normalPageItems;
+const itemCount = page === 1 ? firstPageItems : normalPageItems;
+const pageItems = galleryItemsDesc.slice(startIndex, startIndex + itemCount);
+
+const rows =
+  page === 1
+    ? [
+        pageItems.slice(0, 2),
+        pageItems.slice(2, 5),
+        pageItems.slice(5, 8),
+        pageItems.slice(8, 11),
+      ]
+    : [
+        pageItems.slice(0, 3),
+        pageItems.slice(3, 6),
+        pageItems.slice(6, 9),
+        pageItems.slice(9, 12),
+      ];
+const visibleRows = rows.filter((row) => row.length > 0);
+
+const getPageHref = (pageNumber: number) =>
+  pageNumber === 1 ? "/gallery" : `/gallery/${pageNumber}`;
+---
+
+<Layout
+  title={page === 1
+    ? "Gallery | StarlinWorld"
+    : `Gallery - Page ${page} | StarlinWorld`}
+>
+  <main>
+    {/* Hero Section */}
+    <section id="hero" class="flex items-center justify-center px-6 pt-12">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="mb-8">
+          <h1 class="text-4xl md:text-5xl font-display font-bold mb-6">
+            Gallery
+          </h1>
+          <p class="text-base md:text-lg text-text/90 leading-relaxed">
+            Find our in-game screenshots and videos here.
+            <br />
+            To view all of them, <a
+              href="/join"
+              class="text-text underline hover:text-muted">join our QQ group</a
+            >.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {/* Gallery Section */}
+    <section id="gallery" class="px-6 py-12 bg-background">
+      <div class="max-w-6xl mx-auto">
+        <div class="space-y-4 md:space-y-6">
+          {
+            visibleRows.map((row, rowIndex) => (
+              <div
+                class={`grid gap-4 md:gap-6 ${page === 1 && rowIndex === 0 ? "md:grid-cols-2" : "md:grid-cols-3"}`}
+              >
+                {row.map((item) => (
+                  <article>
+                    {item.type === "image" ? (
+                      <Card
+                        image={item.src}
+                        title={item.title}
+                        alt={item.title}
+                        width={item.width}
+                        height={item.height}
+                      />
+                    ) : (
+                      <>
+                        <div class="overflow-hidden rounded-lg md:rounded-xl mb-4">
+                          <video
+                            src={item.src}
+                            class="w-full h-auto object-cover"
+                            controls
+                            preload="metadata"
+                          />
+                        </div>
+                        <p class="text-lg text-text">{item.title}</p>
+                      </>
+                    )}
+                  </article>
+                ))}
+              </div>
+            ))
+          }
+        </div>
+
+        {/* Pagination */}
+        {
+          totalPages > 1 && (
+            <nav
+              class="mt-16 flex items-center justify-center gap-3"
+              aria-label="Gallery pages"
+            >
+              {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+                (pageNumber) => (
+                  <a
+                    href={getPageHref(pageNumber)}
+                    aria-current={pageNumber === page ? "page" : undefined}
+                    class={`flex h-11 min-w-11 items-center justify-center rounded-full px-4 text-base font-bold transition-colors ${pageNumber === page ? "bg-text text-primary" : "text-text hover:bg-white/10"}`}
+                  >
+                    {pageNumber}
+                  </a>
+                ),
+              )}
+            </nav>
+          )
+        }
+      </div>
+    </section>
+  </main>
+</Layout>
