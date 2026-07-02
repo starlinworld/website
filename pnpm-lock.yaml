@@ -26,9 +26,6 @@ importers:
       astro:
         specifier: ^6.3.1
         version: 6.4.8(@types/node@24.13.2)(jiti@2.7.0)(lightningcss@1.32.0)(rollup@4.62.2)
-      material-symbols:
-        specifier: ^0.45.4
-        version: 0.45.4
       tailwindcss:
         specifier: ^4.3.0
         version: 4.3.2
@@ -1121,9 +1118,6 @@ packages:
 
   markdown-table@3.0.4:
     resolution: {integrity: sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw==}
-
-  material-symbols@0.45.4:
-    resolution: {integrity: sha512-yBdiCnRbXenVfovbQBqT+lBakq1Vc+XEL2/vZIBDeYTi+yuTog9OG7A9cLtM/KeDrldNJDrj6+F9eUFRlUrZOQ==}
 
   mdast-util-definitions@6.0.0:
     resolution: {integrity: sha512-scTllyX6pnYNZH/AIp/0ePz6s4cZtARxImwoPJ7kS42n+MnVsI4XbnG6d4ibehRIldYMWM2LD7ImQblVhUejVQ==}
@@ -2678,8 +2672,6 @@ snapshots:
       source-map-js: 1.2.1
 
   markdown-table@3.0.4: {}
-
-  material-symbols@0.45.4: {}
 
   mdast-util-definitions@6.0.0:
     dependencies:

@@ -1,0 +1,354 @@
+---
+import Header from "../components/Header.astro";
+import CopyButton from "../components/CopyButton.astro";
+import "../styles/global.css";
+
+const navItems = [
+  { label: "Intro", href: "/intro" },
+  { label: "Wiki", href: "https://docs.starlin.world", external: true },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Join", href: "/join" },
+];
+const slides = [
+  {
+    image: "/assets/index/1.png",
+    alt: "Slide 1",
+  },
+  {
+    image: "/assets/index/2.png",
+    alt: "Slide 2",
+  },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StarlinWorld - A cozy, stable, and smooth virtual world built to last</title>
+  </head>
+  <body class="bg-background overflow-hidden">
+    <!-- Desktop Layout -->
+    <div class="hidden md:block h-screen relative">
+      <!-- Index border -->
+      <div class="absolute inset-0 pointer-events-none z-30">
+        <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <mask id="border-mask">
+              <rect width="100%" height="100%" fill="white"></rect>
+              <rect
+                x="40"
+                y="40"
+                width="calc(100% - 80px)"
+                height="calc(100% - 80px)"
+                rx="20"
+                fill="black"></rect>
+            </mask>
+          </defs>
+          <rect
+            width="100%"
+            height="100%"
+            fill="#171615"
+            mask="url(#border-mask)"></rect>
+        </svg>
+      </div>
+
+      <!-- Header for index -->
+      <header
+        class="absolute top-10 left-10 z-40 bg-background py-3 px-6 pr-12"
+        style="border-bottom-right-radius: 32px;"
+      >
+        <nav class="flex items-center gap-16">
+          <a href="/" class="flex items-center">
+            <img
+              src="/brand/logo_english_white.svg"
+              alt="StarlinWorld"
+              class="w-48"
+            />
+          </a>
+          <ul class="flex items-center gap-16">
+            {
+              navItems.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    target={item.external ? "_blank" : undefined}
+                    rel={item.external ? "noopener noreferrer" : undefined}
+                    class="text-base font-medium hover:text-muted transition-colors"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </header>
+
+      <!-- Carousel -->
+      <div id="carousel" class="relative overflow-hidden" style="height: 100vh;">
+        {
+          slides.map((slide, index) => (
+            <div
+              class={`carousel-slide absolute inset-0 transition-transform duration-500 ${index === 0 ? "translate-x-0" : "translate-x-full"}`}
+              data-index={index}
+              style="height: 100vh;"
+            >
+              <img
+                src={slide.image}
+                alt={slide.alt}
+                class="w-full brightness-85 object-cover"
+                style="height: 100vh;"
+              />
+            </div>
+          ))
+        }
+      </div>
+      
+      <button
+        id="prev-btn"
+        class="absolute left-20 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm transition-colors z-20"
+        aria-label="Previous slide"
+      >
+        <i class="fa-solid fa-chevron-left text-text text-xl"></i>
+      </button>
+      <button
+        id="next-btn"
+        class="absolute right-20 top-1/2 -translate-y-1/2 w-12 h-12 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm transition-colors z-20"
+        aria-label="Next slide"
+      >
+        <i class="fa-solid fa-chevron-right text-text text-xl"></i>
+      </button>
+      
+      <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+        {
+          slides.map((_, index) => (
+            <button
+              class={`carousel-dot w-2.5 h-2.5 rounded-full transition-colors ${index === 0 ? "bg-white" : "bg-white/50"}`}
+              data-index={index}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))
+        }
+      </div>
+
+      <!-- Caption -->
+      <div class="absolute bottom-20 left-20 z-20">
+        <p class="text-text text-2xl leading-tight">
+          A cozy, stable,<br />
+          and smooth virtual world built to last
+        </p>
+      </div>
+
+      <!-- CopyButton -->
+      <div
+        class="absolute bottom-10 right-10 z-40 bg-background p-8"
+        style="border-top-left-radius: 32px;"
+      >
+        <CopyButton />
+      </div>
+    </div>
+
+    <!-- Mobile Layout -->
+    <div class="md:hidden flex flex-col h-screen">
+      <div class="shrink-0">
+        <Header />
+      </div>
+
+      <!-- Carousel -->
+      <div
+        class="flex-1 min-h-0 relative overflow-hidden touch-pan-y"
+        id="mobile-carousel-container"
+      >
+        <div id="mobile-carousel" class="relative w-full h-full">
+          {
+            slides.map((slide, index) => (
+              <div
+                class={`mobile-slide absolute w-full h-full transition-transform duration-300 ${index === 0 ? "translate-x-0" : "translate-x-full"}`}
+                data-index={index}
+              >
+                <img
+                  src={slide.image}
+                  alt={slide.alt}
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            ))
+          }
+        </div>
+        
+        <div
+          class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10"
+        >
+          {
+            slides.map((_, index) => (
+              <button
+                class={`mobile-dot w-2.5 h-2.5 rounded-full transition-colors ${index === 0 ? "bg-white" : "bg-white/50"}`}
+                data-index={index}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="shrink-0 px-6 py-6 bg-background">
+        <p class="text-text text-xl leading-tight">
+          A cozy, stable,<br />
+          and smooth virtual world built to last
+        </p>
+      </div>
+
+      <div class="shrink-0 px-6 pb-6 bg-background">
+        <CopyButton />
+      </div>
+    </div>
+
+    <script>
+      // Desktop Carousel
+      const carousel = document.getElementById("carousel");
+      const slides = carousel?.querySelectorAll(".carousel-slide") || [];
+      const dots = document.querySelectorAll(".carousel-dot");
+      const prevBtn = document.getElementById("prev-btn");
+      const nextBtn = document.getElementById("next-btn");
+
+      let currentIndex = 0;
+      const totalSlides = slides.length;
+
+      function updateCarousel(index: number) {
+        slides.forEach((slide, i) => {
+          slide.classList.remove(
+            "translate-x-0",
+            "-translate-x-full",
+            "translate-x-full",
+          );
+          if (i === index) {
+            slide.classList.add("translate-x-0");
+          } else if (i < index) {
+            slide.classList.add("-translate-x-full");
+          } else {
+            slide.classList.add("translate-x-full");
+          }
+        });
+
+        dots.forEach((dot, i) => {
+          if (i === index) {
+            dot.classList.remove("bg-white/50");
+            dot.classList.add("bg-white");
+          } else {
+            dot.classList.remove("bg-white");
+            dot.classList.add("bg-white/50");
+          }
+        });
+
+        currentIndex = index;
+      }
+
+      function nextSlide() {
+        const nextIndex = (currentIndex + 1) % totalSlides;
+        updateCarousel(nextIndex);
+      }
+
+      function prevSlide() {
+        const nextIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateCarousel(nextIndex);
+      }
+
+      prevBtn?.addEventListener("click", prevSlide);
+      nextBtn?.addEventListener("click", nextSlide);
+
+      dots.forEach((dot) => {
+        dot.addEventListener("click", () => {
+          const index = parseInt(dot.getAttribute("data-index") || "0");
+          updateCarousel(index);
+        });
+      });
+
+      const autoPlayInterval = setInterval(nextSlide, 5000);
+
+      // Mobile Carousel
+      const mobileCarousel = document.getElementById("mobile-carousel");
+      const mobileSlides =
+        mobileCarousel?.querySelectorAll(".mobile-slide") || [];
+      const mobileDots = document.querySelectorAll(".mobile-dot");
+      const mobileContainer = document.getElementById(
+        "mobile-carousel-container",
+      );
+
+      let mobileCurrentIndex = 0;
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      function updateMobileCarousel(index: number) {
+        mobileSlides.forEach((slide, i) => {
+          slide.classList.remove(
+            "translate-x-0",
+            "-translate-x-full",
+            "translate-x-full",
+          );
+          if (i === index) {
+            slide.classList.add("translate-x-0");
+          } else if (i < index) {
+            slide.classList.add("-translate-x-full");
+          } else {
+            slide.classList.add("translate-x-full");
+          }
+        });
+
+        mobileDots.forEach((dot, i) => {
+          if (i === index) {
+            dot.classList.remove("bg-white/50");
+            dot.classList.add("bg-white");
+          } else {
+            dot.classList.remove("bg-white");
+            dot.classList.add("bg-white/50");
+          }
+        });
+
+        mobileCurrentIndex = index;
+      }
+
+      function mobileNextSlide() {
+        const nextIndex = (mobileCurrentIndex + 1) % totalSlides;
+        updateMobileCarousel(nextIndex);
+      }
+
+      function mobilePrevSlide() {
+        const nextIndex = (mobileCurrentIndex - 1 + totalSlides) % totalSlides;
+        updateMobileCarousel(nextIndex);
+      }
+
+      mobileContainer?.addEventListener("touchstart", (e) => {
+        touchStartX = e.touches[0].clientX;
+      });
+
+      mobileContainer?.addEventListener("touchend", (e) => {
+        touchEndX = e.changedTouches[0].clientX;
+        handleSwipe();
+      });
+
+      function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+          if (diff > 0) {
+            mobileNextSlide();
+          } else {
+            mobilePrevSlide();
+          }
+        }
+      }
+
+      mobileDots.forEach((dot) => {
+        dot.addEventListener("click", () => {
+          const index = parseInt(dot.getAttribute("data-index") || "0");
+          updateMobileCarousel(index);
+        });
+      });
+
+      const mobileAutoPlayInterval = setInterval(mobileNextSlide, 5000);
+    </script>
+  </body>
+</html>

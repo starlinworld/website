@@ -6,10 +6,10 @@ import { serverAddress } from '../data.ts';
   <span class="text-primary font-semibold text-base">{serverAddress}</span>
   <button
     id="copy-button"
-    class="absolute right-2 bg-primary text-white p-2.5 rounded-full transition-transform active:scale-90 hover:opacity-90 flex items-center justify-center"
+    class="absolute right-2 bg-primary text-text w-10 h-10 rounded-full transition-transform active:scale-90 hover:opacity-90 flex items-center justify-center"
     aria-label="Copy server address"
   >
-    <i class="fa-regular fa-copy text-xl"></i>
+    <i class="fa-regular fa-copy text-md"></i>
   </button>
 </div>
 
@@ -21,9 +21,9 @@ import { serverAddress } from '../data.ts';
       await navigator.clipboard.writeText(serverAddress);
       const icon = button.querySelector("i");
       if (icon) {
-        icon.className = "fa-solid fa-check text-xl";
+        icon.className = "fa-solid fa-check text-sm";
         setTimeout(() => {
-          icon.className = "fa-regular fa-copy text-xl";
+          icon.className = "fa-regular fa-copy text-md";
         }, 1500);
       }
     } catch (err) {
