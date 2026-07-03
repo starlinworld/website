@@ -26,12 +26,17 @@ export const socialLinks = [
     {
         label: "QQ group",
         href: mainQQGroup,
-        icon: "forum",
+        icon: "qq",
+    },
+    {
+        label: "Bilibili",
+        href: "https://space.bilibili.com/178184777",
+        icon: "bilibili",
     },
     {
         label: "GitHub",
         href: "https://github.com/starlinworld",
-        icon: "code",
+        icon: "github",
     },
 ];
 

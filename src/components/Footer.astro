@@ -1,5 +1,6 @@
 ---
-import { mainQQGroup } from "../data.ts";
+import { socialLinks } from "../data.ts";
+
 const currentYear = new Date().getFullYear();
 ---
 
@@ -34,24 +35,19 @@ const currentYear = new Date().getFullYear();
 
       <!-- Social Icons -->
       <div class="flex items-center gap-4 self-end md:self-auto">
-        <a
-          href={mainQQGroup}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-muted hover:text-text transition-colors text-2xl"
-          aria-label="QQ"
-        >
-          <i class="fa-brands fa-qq"></i>
-        </a>
-        <a
-          href="https://github.com/starlinworld"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-muted hover:text-text transition-colors text-2xl"
-          aria-label="GitHub"
-        >
-          <i class="fa-brands fa-github"></i>
-        </a>
+        {
+          socialLinks.map((link) => (
+            <a
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-muted hover:text-text transition-colors text-2xl"
+              aria-label={link.label}
+            >
+              <i class={"fa-brands fa-" + link.icon} />
+            </a>
+          ))
+        }
       </div>
     </div>
   </div>
