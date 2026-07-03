@@ -1,0 +1,74 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Button from "../components/Button.astro";
+import { qqGroups, serverAddress } from "../data";
+---
+
+<Layout title="Join | StarlinWorld">
+  <main>
+    {/* Hero Section */}
+    <section id="hero" class="px-6 pt-24 pb-12">
+      <div
+        class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1fr_450px]"
+      >
+        <div>
+          <h1 class="text-4xl md:text-5xl font-display font-bold mb-6">
+            Join the server now!
+          </h1>
+          <div
+            class="max-w-3xl text-base md:text-lg text-text/90 leading-relaxed mt-8"
+          >
+            <p>Also, join our QQ group for new friends to play with!</p>
+            <p>
+              (For Bedrock players, find the port <a
+                href="https://docs.starlin.world/welcome#%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9C%B0%E5%9D%80"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-text underline hover:text-muted">here</a
+              >.)
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="relative mx-auto aspect-450/291 w-full max-w-60 bg-contain bg-center bg-no-repeat"
+          style="background-image: url('/assets/join/indicator.svg');"
+          aria-label="Server address"
+        >
+          <span
+            class="absolute left-[7%] top-[29%] font-display text-[clamp(1.25rem,5vw,1rem)] font-bold leading-none text-text drop-shadow-[2px_2px_0_rgba(126,126,126,1)]"
+          >
+            {serverAddress}
+          </span>
+        </div>
+      </div>
+    </section>
+
+    {/* QQ Groups Section */}
+    <section id="qq-groups" class="px-6 py-12 md:py-20">
+      <div class="mx-auto grid max-w-4xl gap-12 md:grid-cols-2 md:gap-24">
+        {
+          qqGroups.map((group, index) => (
+            <article class="flex flex-col items-center text-center">
+              <img
+                src={group.image}
+                alt={`${group.name} QR code`}
+                class="w-full max-w-90 rounded-2xl object-cover"
+                loading="lazy"
+              />
+              <h2 class="mt-8 text-text">{group.name}</h2>
+              <Button
+                href={group.href}
+                external
+                variant={index === 0 ? "primary" : "secondary"}
+                class="mt-8"
+              >
+                Join
+              </Button>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+</Layout>
