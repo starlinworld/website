@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://starlin.world/sitemap-index.xml

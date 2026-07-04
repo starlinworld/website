@@ -29,6 +29,11 @@ https://starlin.world
 
 Deployed on GitHub Pages.
 
+## Tech Stack
+- Astro
+- TypeScript
+- Tailwind CSS
+
 ## Develop
 Real-time development with hot reload:
 ```sh

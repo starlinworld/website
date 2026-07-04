@@ -1,9 +1,9 @@
 ---
+import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import CopyButton from "../components/CopyButton.astro";
 import LanguagePicker from "../components/LanguagePicker.astro";
 import en from "../locales/en";
-import "../styles/global.css";
 
 const navItems = [
   { label: "Intro", labelKey: "nav.intro", href: "/intro" },
@@ -23,14 +23,13 @@ const slides = [
 ];
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{en.index.title}</title>
-  </head>
-  <body class="bg-background overflow-hidden" data-i18n-document-title="index.title">
+<Layout
+  title={en.index.title}
+  titleKey="index.title"
+  bodyClass="bg-background overflow-hidden"
+  noHeader
+  noFooter
+>
     <!-- Desktop Layout -->
     <div class="hidden md:block h-screen relative">
       <!-- Index border -->
@@ -355,5 +354,4 @@ const slides = [
 
       const mobileAutoPlayInterval = setInterval(mobileNextSlide, 5000);
     </script>
-  </body>
-</html>
+</Layout>

@@ -3,20 +3,50 @@ import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import en from "../locales/en";
+import { socialLinks } from "../data";
 
 interface Props {
   title: string;
   description?: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+  type?: "website" | "article";
   titleKey?: string;
   page?: number;
+  bodyClass?: string;
+  noHeader?: boolean;
+  noFooter?: boolean;
 }
+
+const siteName = "StarlinWorld";
+const defaultOgImage = "/assets/og-image.png";
+const keywords = "StarlinWorld, Minecraft server, Minecraft community, survival server, modded server, gallery";
 
 const {
   title,
   description = en.meta.defaultDescription,
+  ogImage = defaultOgImage,
+  canonicalUrl,
+  type = "website",
   titleKey,
   page,
+  bodyClass = "bg-background text-text",
+  noHeader = false,
+  noFooter = false,
 } = Astro.props;
+
+const siteUrl = Astro.site ?? new URL(Astro.url.origin);
+const resolvedCanonicalUrl = canonicalUrl ?? new URL(Astro.url.pathname, siteUrl).href;
+const resolvedOgImage = new URL(ogImage, siteUrl).href;
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: siteName,
+  url: siteUrl.href,
+  logo: new URL("/brand/logo_english.png", siteUrl).href,
+  description: en.meta.defaultDescription,
+  sameAs: socialLinks.map((link) => link.href),
+};
 ---
 
 <!doctype html>
@@ -24,13 +54,33 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content={siteName} />
+    <link rel="canonical" href={resolvedCanonicalUrl} />
+
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={resolvedCanonicalUrl} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:image" content={resolvedOgImage} />
+    <meta property="og:locale" content="en_US" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={resolvedOgImage} />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <script type="application/ld+json" set:html={JSON.stringify(organizationJsonLd)} />
   </head>
-  <body class="bg-background text-text" data-i18n-document-title={titleKey} data-i18n-page={page}>
-    <Header />
+  <body class={bodyClass} data-i18n-document-title={titleKey} data-i18n-page={page}>
+    {!noHeader && <Header />}
     <slot />
-    <Footer />
+    {!noFooter && <Footer />}
   </body>
 </html>
