@@ -1,5 +1,6 @@
 ---
 import { socialLinks } from "../data.ts";
+import en from "../locales/en";
 
 const currentYear = new Date().getFullYear();
 ---
@@ -16,20 +17,21 @@ const currentYear = new Date().getFullYear();
             src="/brand/logo_english_white.svg"
             alt="StarlinWorld"
             class="w-48"
+            data-i18n-logo
           />
         </a>
         <div class="text-sm text-muted leading-relaxed">
           <p>&copy; 2017-{currentYear} StarlinWorld.</p>
           <p>
-            Design: <a
+            <span>Design:</span> <a
               href="https://katorly.com"
               target="_blank"
               rel="noopener noreferrer"
               class="text-text hover:text-muted transition-colors">Katorly Lab</a
             >.
           </p>
-          <p>Not an official Minecraft product.</p>
-          <p>Not associated with Mojang or Microsoft.</p>
+          <p data-i18n="footer.unofficialMinecraft">{en.footer.unofficialMinecraft}</p>
+          <p data-i18n="footer.notAssociated">{en.footer.notAssociated}</p>
         </div>
       </div>
 

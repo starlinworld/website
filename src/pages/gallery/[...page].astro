@@ -2,6 +2,7 @@
 import Layout from "../../layouts/Layout.astro";
 import Card from "../../components/Card.astro";
 import { galleryItems } from "../../data";
+import en from "../../locales/en";
 
 const firstPageItems = 11;
 const normalPageItems = 12;
@@ -49,24 +50,27 @@ const getPageHref = (pageNumber: number) =>
 
 <Layout
   title={page === 1
-    ? "Gallery | StarlinWorld"
-    : `Gallery - Page ${page} | StarlinWorld`}
+    ? en.gallery.title
+    : en.gallery.pageTitle.replace("{page}", String(page))}
+  titleKey={page === 1 ? "gallery.title" : "gallery.pageTitle"}
+  page={page}
 >
   <main>
     {/* Hero Section */}
     <section id="hero" class="flex items-center justify-center px-6 pt-24 pb-12">
       <div class="max-w-4xl mx-auto text-center">
         <div class="mb-8">
-          <h1 class="text-4xl md:text-5xl font-display font-bold mb-6">
-            Gallery
+          <h1 class="text-4xl md:text-5xl font-display font-bold mb-6" data-i18n="gallery.heading">
+            {en.gallery.heading}
           </h1>
           <p class="text-base md:text-lg text-text/90 leading-relaxed">
-            Find our in-game screenshots and videos here.
+            <span data-i18n="gallery.bodyPrefix">{en.gallery.bodyPrefix}</span>
             <br />
-            To view all of them, <a
+            <span data-i18n="gallery.bodyLinkPrefix">{en.gallery.bodyLinkPrefix}</span><a
               href="/join"
-              class="text-text underline hover:text-muted">join our QQ group</a
-            >.
+              class="text-text underline hover:text-muted"
+              data-i18n="gallery.bodyLink">{en.gallery.bodyLink}</a
+            ><span data-i18n="gallery.bodyLinkSuffix">{en.gallery.bodyLinkSuffix}</span>
           </p>
         </div>
       </div>
@@ -117,6 +121,7 @@ const getPageHref = (pageNumber: number) =>
             <nav
               class="mt-16 flex items-center justify-center gap-3"
               aria-label="Gallery pages"
+              data-i18n-aria-label="gallery.pagesLabel"
             >
               {Array.from({ length: totalPages }, (_, index) => index + 1).map(
                 (pageNumber) => (

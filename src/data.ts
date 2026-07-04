@@ -1,3 +1,5 @@
+import en from "./locales/en";
+
 export type MediaItem = {
     title: string;
     src: string;
@@ -8,12 +10,15 @@ export type MediaItem = {
 
 export type FeatureItem = {
     title: string;
+    titleKey: string;
     description: string;
+    descriptionKey: string;
     icon: string;
 }
 
 export type QQGroup = {
     name: string;
+    nameKey: string;
     href: string;
     image: string;
 };
@@ -43,7 +48,8 @@ export const socialLinks = [
 export const servers = [
   {
     id: "survival",
-    name: "Survival",
+        name: en.data.serverSurvival,
+    nameKey: "data.serverSurvival",
     icon: "fa-solid fa-house",
     image: "/assets/intro/survival.png",
     color: "text-green",
@@ -51,7 +57,8 @@ export const servers = [
   },
   {
     id: "modded",
-    name: "Modded",
+        name: en.data.serverModded,
+    nameKey: "data.serverModded",
     icon: "fa-solid fa-puzzle-piece",
     image: "/assets/intro/modded.png",
     color: "text-pink",
@@ -85,28 +92,38 @@ export const landscapeItems: MediaItem[] = [
 
 export const featureItems: FeatureItem[] = [
     {
-        title: "Always Up to Date",
-        description: "Once PaperMC and plugins are ready, we update the server to the latest Minecraft version.",
+        title: en.data.featureUpdateTitle,
+        titleKey: "data.featureUpdateTitle",
+        description: en.data.featureUpdateDescription,
+        descriptionKey: "data.featureUpdateDescription",
         icon: "fa-solid fa-arrow-up",
     },
     {
-        title: "World Storage",
-        description: "The world will always remain accessible. We backup daily and store them securely, so you can build without worries.",
+        title: en.data.featureStorageTitle,
+        titleKey: "data.featureStorageTitle",
+        description: en.data.featureStorageDescription,
+        descriptionKey: "data.featureStorageDescription",
         icon: "fa-solid fa-database",
     },
     {
-        title: "Player-Managed",
-        description: "The server is maintained by the community. Plugin requests and customizations are discussed and determined by the players.",
+        title: en.data.featureManagedTitle,
+        titleKey: "data.featureManagedTitle",
+        description: en.data.featureManagedDescription,
+        descriptionKey: "data.featureManagedDescription",
         icon: "fa-solid fa-users",
     },
     {
-        title: "Non-Profit",
-        description: "Since founded, the server is fully supported by player donations, and never has any monetization.",
+        title: en.data.featureNonProfitTitle,
+        titleKey: "data.featureNonProfitTitle",
+        description: en.data.featureNonProfitDescription,
+        descriptionKey: "data.featureNonProfitDescription",
         icon: "fa-solid fa-hand-holding-heart",
     },
     {
-        title: "Open-Source",
-        description: "All configuration files, excluding player data, are open-sourced on GitHub.",
+        title: en.data.featureOpenSourceTitle,
+        titleKey: "data.featureOpenSourceTitle",
+        description: en.data.featureOpenSourceDescription,
+        descriptionKey: "data.featureOpenSourceDescription",
         icon: "fa-brands fa-github",
     },
 ];
@@ -275,12 +292,14 @@ export const galleryItems: MediaItem[] = [
 
 export const qqGroups: QQGroup[] = [
     {
-        name: "Main QQ Group",
+        name: en.data.mainQQGroup,
+        nameKey: "data.mainQQGroup",
         href: mainQQGroup,
         image: "/assets/join/main.jpg",
     },
     {
-        name: "Server Management QQ Group",
+        name: en.data.workQQGroup,
+        nameKey: "data.workQQGroup",
         href: workQQGroup,
         image: "/assets/join/work.jpg",
     },

@@ -1,0 +1,90 @@
+---
+import { getValue, languages } from "../locales";
+import en from "../locales/en";
+---
+
+<div class="language-picker relative">
+  <button
+    type="button"
+    class="language-picker-button flex items-center justify-center rounded-full px-4 py-4 text-base font-bold transition-colors text-text hover:bg-white/10"
+    aria-haspopup="menu"
+    aria-expanded="false"
+    data-i18n-aria-label="language.toggle"
+    data-i18n-title="language.toggle"
+  >
+    <i class="fa-solid fa-language"></i>
+    <span class="sr-only" data-i18n="language.toggle">{en.language.toggle}</span
+    >
+  </button>
+  <div
+    class="language-picker-menu absolute right-0 top-full z-50 mt-3 hidden min-w-36 overflow-hidden rounded-lg border border-white/10 bg-background"
+    role="menu"
+  >
+    {
+      languages.map((language) => (
+        <button
+          type="button"
+          class="language-picker-option block w-full px-4 py-3 text-left text-sm font-medium text-text transition-colors hover:bg-white/10"
+          data-locale={language.code}
+          data-i18n={language.labelKey}
+          role="menuitem"
+        >
+          {getValue("en", language.labelKey)}
+        </button>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  import { getInitialLocale, isLocale, translatePage } from "../locales";
+
+  function closeMenus() {
+    document.querySelectorAll(".language-picker-menu").forEach((menu) => {
+      menu.classList.add("hidden");
+    });
+
+    document
+      .querySelectorAll(".language-picker-button")
+      .forEach((button) => button.setAttribute("aria-expanded", "false"));
+  }
+
+  function setLocale(locale: string) {
+    if (!isLocale(locale)) return;
+
+    window.localStorage.setItem("starlinworld-locale", locale);
+    translatePage(locale);
+    closeMenus();
+  }
+
+  translatePage(getInitialLocale());
+
+  document.querySelectorAll(".language-picker").forEach((picker) => {
+    const button = picker.querySelector(".language-picker-button");
+    const menu = picker.querySelector(".language-picker-menu");
+
+    button?.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const isOpen = !menu?.classList.contains("hidden");
+      closeMenus();
+
+      if (!isOpen) {
+        menu?.classList.remove("hidden");
+        button.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+
+  document.querySelectorAll(".language-picker-option").forEach((option) => {
+    option.addEventListener("click", () => {
+      setLocale(option.getAttribute("data-locale") || "");
+    });
+  });
+
+  document.addEventListener("click", closeMenus);
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeMenus();
+    }
+  });
+</script>

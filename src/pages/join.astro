@@ -2,9 +2,10 @@
 import Layout from "../layouts/Layout.astro";
 import Button from "../components/Button.astro";
 import { qqGroups, serverAddress } from "../data";
+import en from "../locales/en";
 ---
 
-<Layout title="Join | StarlinWorld">
+<Layout title={en.join.title} titleKey="join.title">
   <main>
     {/* Hero Section */}
     <section id="hero" class="px-6 pt-24 pb-12">
@@ -12,20 +13,21 @@ import { qqGroups, serverAddress } from "../data";
         class="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1fr_450px]"
       >
         <div>
-          <h1 class="text-4xl md:text-5xl font-display font-bold mb-6">
-            Join the server now!
+          <h1 class="text-4xl md:text-5xl font-display font-bold mb-6" data-i18n="join.heroTitle">
+            {en.join.heroTitle}
           </h1>
           <div
             class="max-w-3xl text-base md:text-lg text-text/90 leading-relaxed mt-8"
           >
-            <p>Also, join our QQ group for new friends to play with!</p>
+            <p data-i18n="join.lead">{en.join.lead}</p>
             <p>
-              (For Bedrock players, find the port <a
+              <span data-i18n="join.bedrockPrefix">{en.join.bedrockPrefix}</span><a
                 href="https://docs.starlin.world/welcome#%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9C%B0%E5%9D%80"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-text underline hover:text-muted">here</a
-              >.)
+                class="text-text underline hover:text-muted"
+                data-i18n="join.bedrockLink">{en.join.bedrockLink}</a
+              ><span data-i18n="join.bedrockSuffix">{en.join.bedrockSuffix}</span>
             </p>
           </div>
         </div>
@@ -53,17 +55,19 @@ import { qqGroups, serverAddress } from "../data";
               <img
                 src={group.image}
                 alt={`${group.name} QR code`}
+                data-i18n-alt-prefix={group.nameKey}
+                data-i18n-alt-suffix="join.qrAltSuffix"
                 class="w-full max-w-90 rounded-2xl object-cover"
                 loading="lazy"
               />
-              <h2 class="mt-8 text-text">{group.name}</h2>
+              <h2 class="mt-8 text-text" data-i18n={group.nameKey}>{group.name}</h2>
               <Button
                 href={group.href}
                 external
                 variant={index === 0 ? "primary" : "secondary"}
                 class="mt-8"
               >
-                Join
+                <span data-i18n="join.button">{en.join.button}</span>
               </Button>
             </article>
           ))

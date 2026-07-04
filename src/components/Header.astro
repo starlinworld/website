@@ -1,11 +1,12 @@
 ---
 import CopyButton from "./CopyButton.astro";
+import LanguagePicker from "./LanguagePicker.astro";
 
 const navItems = [
-  { label: "Intro", href: "/intro" },
-  { label: "Wiki", href: "https://docs.starlin.world", external: true },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Join", href: "/join" },
+  { label: "Intro", labelKey: "nav.intro", href: "/intro" },
+  { label: "Wiki", labelKey: "nav.wiki", href: "https://docs.starlin.world", external: true },
+  { label: "Gallery", labelKey: "nav.gallery", href: "/gallery" },
+  { label: "Join", labelKey: "nav.join", href: "/join" },
 ];
 ---
 
@@ -19,11 +20,12 @@ const navItems = [
           src="/brand/logo_english_white.svg"
           alt="StarlinWorld"
           class="w-48"
+          data-i18n-logo
         />
       </a>
 
       <!-- Nav Items -->
-      <ul class="flex items-center gap-8 md:gap-16">
+      <ul class="flex items-center gap-8 lg:gap-16">
         {
           navItems.map((item) => (
             <li>
@@ -32,6 +34,7 @@ const navItems = [
                 target={item.external ? "_blank" : undefined}
                 rel={item.external ? "noopener noreferrer" : undefined}
                 class="text-base font-display font-medium hover:text-muted transition-colors"
+                data-i18n={item.labelKey}
               >
                 {item.label}
               </a>
@@ -39,9 +42,11 @@ const navItems = [
           ))
         }
       </ul>
-
-      <!-- Copy Button -->
-      <CopyButton />
+      
+      <div class="flex items-center gap-4">
+        <LanguagePicker />
+        <CopyButton />
+      </div>
     </div>
 
     <!-- Mobile Layout -->
@@ -53,6 +58,7 @@ const navItems = [
             src="/brand/logo_english_white.svg"
             alt="StarlinWorld"
             class="w-48"
+            data-i18n-logo
           />
         </a>
 
@@ -80,6 +86,7 @@ const navItems = [
               src="/brand/logo_english_white.svg"
               alt="StarlinWorld"
               class="w-48"
+              data-i18n-logo
             />
           </a>
           <button
@@ -101,12 +108,16 @@ const navItems = [
                   target={item.external ? "_blank" : undefined}
                   rel={item.external ? "noopener noreferrer" : undefined}
                   class="block text-lg font-medium py-3 px-4 hover:bg-white/5 rounded-lg transition-colors"
+                  data-i18n={item.labelKey}
                 >
                   {item.label}
                 </a>
               </li>
             ))
           }
+          <li class="mt-2 [&_.language-picker-button]:justify-start [&_.language-picker-button]:rounded-lg [&_.language-picker-button]:px-4 [&_.language-picker-button]:py-3 [&_.language-picker-menu]:left-0 [&_.language-picker-menu]:right-auto">
+            <LanguagePicker />
+          </li>
         </ul>
 
         <!-- Copy Button at Bottom -->
@@ -130,7 +141,7 @@ const navItems = [
   menuClose?.addEventListener("click", () => {
     mobileMenu?.classList.add("translate-x-full");
   });
-  
+
   const mobileMenuLinks = mobileMenu?.querySelectorAll("a");
   mobileMenuLinks?.forEach((link) => {
     link.addEventListener("click", () => {

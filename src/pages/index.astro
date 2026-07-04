@@ -1,13 +1,15 @@
 ---
 import Header from "../components/Header.astro";
 import CopyButton from "../components/CopyButton.astro";
+import LanguagePicker from "../components/LanguagePicker.astro";
+import en from "../locales/en";
 import "../styles/global.css";
 
 const navItems = [
-  { label: "Intro", href: "/intro" },
-  { label: "Wiki", href: "https://docs.starlin.world", external: true },
-  { label: "Gallery", href: "/gallery" },
-  { label: "Join", href: "/join" },
+  { label: "Intro", labelKey: "nav.intro", href: "/intro" },
+  { label: "Wiki", labelKey: "nav.wiki", href: "https://docs.starlin.world", external: true },
+  { label: "Gallery", labelKey: "nav.gallery", href: "/gallery" },
+  { label: "Join", labelKey: "nav.join", href: "/join" },
 ];
 const slides = [
   {
@@ -26,9 +28,9 @@ const slides = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>StarlinWorld - A cozy, stable, and smooth virtual world built to last</title>
+    <title>{en.index.title}</title>
   </head>
-  <body class="bg-background overflow-hidden">
+  <body class="bg-background overflow-hidden" data-i18n-document-title="index.title">
     <!-- Desktop Layout -->
     <div class="hidden md:block h-screen relative">
       <!-- Index border -->
@@ -65,6 +67,7 @@ const slides = [
               src="/brand/logo_english_white.svg"
               alt="StarlinWorld"
               class="w-48"
+              data-i18n-logo
             />
           </a>
           <ul class="flex items-center gap-16">
@@ -76,6 +79,7 @@ const slides = [
                     target={item.external ? "_blank" : undefined}
                     rel={item.external ? "noopener noreferrer" : undefined}
                     class="text-base font-medium hover:text-muted transition-colors"
+                    data-i18n={item.labelKey}
                   >
                     {item.label}
                   </a>
@@ -83,6 +87,7 @@ const slides = [
               ))
             }
           </ul>
+          <LanguagePicker />
         </nav>
       </header>
 
@@ -136,8 +141,8 @@ const slides = [
       <!-- Caption -->
       <div class="absolute bottom-20 left-20 z-20">
         <p class="text-text text-2xl leading-tight">
-          A cozy, stable,<br />
-          and smooth virtual world built to last
+          <span data-i18n="index.captionLine1">{en.index.captionLine1}</span><br />
+          <span data-i18n="index.captionLine2">{en.index.captionLine2}</span>
         </p>
       </div>
 
@@ -195,8 +200,8 @@ const slides = [
 
       <div class="shrink-0 px-6 py-6 bg-background">
         <p class="text-text text-xl leading-tight">
-          A cozy, stable,<br />
-          and smooth virtual world built to last
+          <span data-i18n="index.captionLine1">{en.index.captionLine1}</span><br />
+          <span data-i18n="index.captionLine2">{en.index.captionLine2}</span>
         </p>
       </div>
 

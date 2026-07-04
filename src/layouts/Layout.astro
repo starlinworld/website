@@ -2,13 +2,21 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import en from "../locales/en";
 
 interface Props {
   title: string;
   description?: string;
+  titleKey?: string;
+  page?: number;
 }
 
-const { title, description = "A cozy, stable, and smooth virtual world built to last" } = Astro.props;
+const {
+  title,
+  description = en.meta.defaultDescription,
+  titleKey,
+  page,
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -20,7 +28,7 @@ const { title, description = "A cozy, stable, and smooth virtual world built to 
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
-  <body class="bg-background text-text">
+  <body class="bg-background text-text" data-i18n-document-title={titleKey} data-i18n-page={page}>
     <Header />
     <slot />
     <Footer />

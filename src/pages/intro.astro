@@ -3,9 +3,10 @@ import Layout from "../layouts/Layout.astro";
 import Button from "../components/Button.astro";
 import Card from "../components/Card.astro";
 import { servers, landscapeItems, featureItems } from "../data";
+import en from "../locales/en";
 ---
 
-<Layout title="Introduction | StarlinWorld">
+<Layout title={en.intro.title} titleKey="intro.title">
   <main>
     {/* Hero Section */}
     <section
@@ -21,15 +22,13 @@ import { servers, landscapeItems, featureItems } from "../data";
               class="w-full h-full"
             />
           </div>
-          <h1 class="text-4xl md:text-5xl font-display font-bold mb-6">
-            StarlinWorld
+          <h1 class="text-4xl md:text-5xl font-display font-bold mb-6" data-i18n="intro.heroTitle">
+            {en.intro.heroTitle}
           </h1>
           <p class="text-base md:text-lg text-text/90 leading-relaxed">
-            A cozy, stable, smooth, long-running virtual world with no world
-            resets.
+            <span data-i18n="intro.heroBodyLine1">{en.intro.heroBodyLine1}</span>
             <br />
-            Here, every traveler in this virtual world shines like a brilliant star,
-            standing among the radiant cosmos.
+            <span data-i18n="intro.heroBodyLine2">{en.intro.heroBodyLine2}</span>
           </p>
         </div>
       </div>
@@ -39,11 +38,11 @@ import { servers, landscapeItems, featureItems } from "../data";
     <section id="servers" class="px-6 py-12 bg-background">
       <div class="max-w-6xl mx-auto">
         <div class="mb-12">
-          <h2 class="text-3xl md:text-4xl font-display font-bold mb-4">
-            Servers
+          <h2 class="text-3xl md:text-4xl font-display font-bold mb-4" data-i18n="intro.serversTitle">
+            {en.intro.serversTitle}
           </h2>
-          <p class="text-lg text-text/80">
-            We have multiple subservers running currently.
+          <p class="text-lg text-text/80" data-i18n="intro.serversLead">
+            {en.intro.serversLead}
           </p>
         </div>
         <div class="grid md:grid-cols-2 gap-8 mb-12">
@@ -68,7 +67,7 @@ import { servers, landscapeItems, featureItems } from "../data";
                     <i class={`${server.icon} text-primary text-2xl`} />
                   </div>
                   <div class="flex items-center gap-2">
-                    <h3 class={`text-xl md:text-2xl font-bold ${server.color}`}>
+                    <h3 class={`text-xl md:text-2xl font-bold ${server.color}`} data-i18n={server.nameKey}>
                       {server.name}
                     </h3>
                     <span class="relative inline-flex items-center justify-center w-5 h-5">
@@ -87,7 +86,7 @@ import { servers, landscapeItems, featureItems } from "../data";
         </div>
         <div class="flex justify-center">
           <Button href="/join" variant="primary">
-            Join the server today
+            <span data-i18n="intro.joinServer">{en.intro.joinServer}</span>
           </Button>
         </div>
       </div>
@@ -96,8 +95,8 @@ import { servers, landscapeItems, featureItems } from "../data";
     {/* Features Section */}
     <section id="features" class="px-6 py-12">
       <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-display font-bold mb-12">
-          Features
+        <h2 class="text-3xl md:text-4xl font-display font-bold mb-12" data-i18n="intro.featuresTitle">
+          {en.intro.featuresTitle}
         </h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {
@@ -106,8 +105,8 @@ import { servers, landscapeItems, featureItems } from "../data";
                 <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
                   <i class={`${feature.icon} text-primary text-2xl`} />
                 </div>
-                <h3 class="text-xl font-bold mb-2">{feature.title}</h3>
-                <p class="text-text/70 text-sm leading-relaxed">
+                <h3 class="text-xl font-bold mb-2" data-i18n={feature.titleKey}>{feature.title}</h3>
+                <p class="text-text/70 text-sm leading-relaxed" data-i18n={feature.descriptionKey}>
                   {feature.description}
                 </p>
               </div>
@@ -121,8 +120,8 @@ import { servers, landscapeItems, featureItems } from "../data";
                 <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
                   <i class={`${feature.icon} text-primary text-2xl`} />
                 </div>
-                <h3 class="text-xl font-bold mb-2">{feature.title}</h3>
-                <p class="text-text/70 text-sm leading-relaxed">
+                <h3 class="text-xl font-bold mb-2" data-i18n={feature.titleKey}>{feature.title}</h3>
+                <p class="text-text/70 text-sm leading-relaxed" data-i18n={feature.descriptionKey}>
                   {feature.description}
                 </p>
               </div>
@@ -135,8 +134,8 @@ import { servers, landscapeItems, featureItems } from "../data";
     {/* Landscape Section */}
     <section class="px-6 py-12 bg-background">
       <div class="max-w-6xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-display font-bold mb-12">
-          Landscape
+        <h2 class="text-3xl md:text-4xl font-display font-bold mb-12" data-i18n="intro.landscapeTitle">
+          {en.intro.landscapeTitle}
         </h2>
         <div class="space-y-12">
           {
@@ -161,7 +160,7 @@ import { servers, landscapeItems, featureItems } from "../data";
         </div>
         <div class="flex justify-center mt-16">
           <Button href="/gallery" variant="secondary">
-            More in our Gallery
+            <span data-i18n="intro.galleryMore">{en.intro.galleryMore}</span>
           </Button>
         </div>
       </div>
