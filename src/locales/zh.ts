@@ -9,7 +9,7 @@ const zh: typeof en = {
   },
   nav: {
     intro: "介绍",
-    wiki: "文档",
+    wiki: "百科",
     gallery: "图库",
     join: "加入",
   },
